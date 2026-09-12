@@ -28,8 +28,7 @@ public class BankAccount {
     private Integer pin;
     private String accountType; // "Savings" or "Current"
 
-    // Every deposit/withdrawal gets logged here as a plain string —
-    // logging logic is mixed directly into deposit()/withdraw().
+    // Every deposit/withdrawal gets logged here as a plain string.
     private List<String> transactionLog = new ArrayList<>();
 
     public BankAccount(int accountNumber, String name, int age, double balance, String accountType) {
@@ -56,7 +55,7 @@ public class BankAccount {
     }
 
     // ----------------------------------------------------
-    // Account operations, tangled with logging + notification
+    // Account operations
     // ----------------------------------------------------
 
     public boolean deposit(double amount) {
@@ -75,12 +74,6 @@ public class BankAccount {
 
         // Logging responsibility, baked directly into deposit()
         transactionLog.add("DEPOSIT: Rs. " + amount + " | New balance: " + balance);
-
-        // Notification responsibility, baked directly into deposit()
-        sendEmail(name, "Your deposit of Rs. " + amount + " was successful. New balance: " + balance);
-
-        // Persistence responsibility, baked directly into deposit()
-        saveToDatabase();
 
         return true;
     }
@@ -114,26 +107,18 @@ public class BankAccount {
 
         transactionLog.add("WITHDRAW: Rs. " + amount + " | New balance: " + balance);
 
-        sendEmail(name, "Your withdrawal of Rs. " + amount + " was successful. New balance: " + balance);
-
-        saveToDatabase();
-
         return true;
     }
 
     public boolean closeAccount() {
         if (status.equals("Inactive")) return false;
         status = "Inactive";
-        sendEmail(name, "Your account has been closed.");
-        saveToDatabase();
         return true;
     }
 
     public boolean reopenAccount() {
         if (status.equals("Active")) return false;
         status = "Active";
-        sendEmail(name, "Your account has been reopened.");
-        saveToDatabase();
         return true;
     }
 
@@ -161,24 +146,6 @@ public class BankAccount {
         } else {
             return 0.0;
         }
-    }
-
-    // ----------------------------------------------------
-    // "Persistence" — pretend database logic living inside the account
-    // ----------------------------------------------------
-
-    private void saveToDatabase() {
-        // Pretend this talks to MySQL. In reality just prints.
-        System.out.println("[DB] Saving account " + accountNumber + " to MySQL...");
-    }
-
-    // ----------------------------------------------------
-    // "Notification" — pretend email logic living inside the account
-    // ----------------------------------------------------
-
-    private void sendEmail(String recipient, String message) {
-        // Pretend this talks to an SMTP server. In reality just prints.
-        System.out.println("[EMAIL] To: " + recipient + " | " + message);
     }
 
     // ----------------------------------------------------
