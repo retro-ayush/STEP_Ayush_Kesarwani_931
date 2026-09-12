@@ -17,7 +17,6 @@ BankAccount holds a single account's state
 and applies deposits and withdrawals to that balance, 
 rejecting any that aren't valid — nothing else.
 */
-
 /*
 Doing the section 1 , left me with creating 5 files with there own functional part for the whole BankAccount System.
 This makes testing easier because each responsibility can be tested independently without setting up the entire account system.
@@ -31,7 +30,6 @@ public class BankAccount {
     private int age;
     private double balance;
     private String status;
-    private Integer pin;
     private String accountType; // "Savings" or "Current"
 
     // Every deposit/withdrawal gets logged here as a plain string.
@@ -57,7 +55,6 @@ public class BankAccount {
         this.balance = balance;
         this.accountType = accountType;
         this.status = "Active";
-        this.pin = null;
     }
 
     // ----------------------------------------------------
@@ -84,18 +81,11 @@ public class BankAccount {
         return true;
     }
 
-    public boolean withdraw(double amount, Integer enteredPin) {
+    public boolean withdraw(double amount) {
 
         if (!status.equals("Active")) {
             System.out.println("Account is not active");
             return false;
-        }
-
-        if (pin != null) {
-            if (enteredPin == null || !enteredPin.equals(pin)) {
-                System.out.println("Incorrect PIN");
-                return false;
-            }
         }
 
         if (amount <= 0) {
@@ -116,44 +106,6 @@ public class BankAccount {
         return true;
     }
 
-    public boolean closeAccount() {
-        if (status.equals("Inactive")) return false;
-        status = "Inactive";
-        return true;
-    }
-
-    public boolean reopenAccount() {
-        if (status.equals("Active")) return false;
-        status = "Active";
-        return true;
-    }
-
-    public boolean setPin(int newPin) {
-        if (newPin >= 1000 && newPin <= 9999) {
-            this.pin = newPin;
-            return true;
-        }
-        return false;
-    }
-
-    public boolean verifyPin(int enteredPin) {
-        return pin != null && pin.equals(enteredPin);
-    }
-
-    // ----------------------------------------------------
-    // Interest calculation — an if/else chain baked into the account itself
-    // ----------------------------------------------------
-
-    public double calculateInterest() {
-        if (accountType.equals("Savings")) {
-            return balance * 0.04;
-        } else if (accountType.equals("Current")) {
-            return balance * 0.01;
-        } else {
-            return 0.0;
-        }
-    }
-
     // ----------------------------------------------------
     // Getters
     // ----------------------------------------------------
@@ -164,7 +116,6 @@ public class BankAccount {
     public double getBalance() { return balance; }
     public String getStatus() { return status; }
     public String getAccountType() { return accountType; }
-    public boolean hasPin() { return pin != null; }
     public List<String> getTransactionLog() {return new ArrayList<>(transactionLog);}
 
 }
