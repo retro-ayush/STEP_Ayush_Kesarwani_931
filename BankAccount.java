@@ -18,6 +18,12 @@ and applies deposits and withdrawals to that balance,
 rejecting any that aren't valid — nothing else.
 */
 
+/*
+Doing the section 1 , left me with creating 5 files with there own functional part for the whole BankAccount System.
+This makes testing easier because each responsibility can be tested independently without setting up the entire account system.
+Dependencies like the database and email service can also be mocked, making tests faster and more reliable.
+ */
+
 public class BankAccount {
 
     private int accountNumber;
