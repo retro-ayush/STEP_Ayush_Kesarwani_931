@@ -149,19 +149,6 @@ public class BankAccount {
     }
 
     // ----------------------------------------------------
-    // "Statement generation" — formatting logic living inside the account
-    // ----------------------------------------------------
-
-    public void printStatement() {
-        System.out.println("---- Statement for Account #" + accountNumber + " (" + name + ") ----");
-        for (String entry : transactionLog) {
-            System.out.println(entry);
-        }
-        System.out.println("Current Balance: Rs. " + balance);
-        System.out.println("-----------------------------------------------------");
-    }
-
-    // ----------------------------------------------------
     // Getters
     // ----------------------------------------------------
 
@@ -172,4 +159,6 @@ public class BankAccount {
     public String getStatus() { return status; }
     public String getAccountType() { return accountType; }
     public boolean hasPin() { return pin != null; }
+    public List<String> getTransactionLog() {return new ArrayList<>(transactionLog);}
+
 }
