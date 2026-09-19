@@ -1,6 +1,8 @@
 package com.gdb.exceptions;
 
-// TODO: Step 2 - Thrown when an incorrect PIN is entered.
-//   Add a public constructor that takes a String message and passes it to AccountException with super(message).
+// Step 2 - Thrown when an incorrect PIN is entered.
 public class InvalidPinException extends AccountException {
+    public InvalidPinException(String message) {
+        super(message);
+    }
 }
