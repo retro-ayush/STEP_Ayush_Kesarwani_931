@@ -6,9 +6,6 @@ public class TestAccount {
     public static void main(String[] args) {
         System.out.println("=== Activity 1: Basic Account Test ===");
 
-        // TODO: After completing all 6 steps in Account.java, uncomment the test calls below and run
-        // this program. Your output should match the "Expected Output" section of README.md.
-
         Account acc = new Account("ACC1001", "Rajesh Sharma", 28, 5000.0, "SAVINGS", "ACTIVE");
         acc.displayAccountInfo();
         
