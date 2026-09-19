@@ -1,0 +1,16 @@
+# Compiled Java class files
+*.class
+bin/
+
+# Common Java build output
+target/
+out/
+build/
+
+# Packaged archives
+*.jar
+*.war
+*.ear
+
+# macOS
+.DS_Store
